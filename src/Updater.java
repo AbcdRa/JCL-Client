@@ -4,6 +4,7 @@ import java.net.Socket;
 public class Updater extends Thread {
     private Socket socket;
     private BufferedReader inBR;
+
     Updater(Socket socket) {
         this.socket = socket;
         start();

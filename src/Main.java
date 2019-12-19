@@ -14,7 +14,7 @@ public class Main {
         private static Process process = null;
 
         //Инициализируем сокет
-        public static boolean initSocket() {
+        private static boolean initSocket() {
             while(true) {
                 int port = 1234;
                 try {
@@ -25,16 +25,6 @@ public class Main {
                     System.out.println("IP: ");
                     ip = scan.nextLine();
                     if(ip.compareToIgnoreCase("0") == 0) return false;
-                    System.out.println("Поменять порт ? ");
-                    if(scan.nextLine().compareToIgnoreCase("да") == 0) {
-                        System.out.println("Port: ");
-                        try {
-                            port = Integer.parseInt(scan.nextLine());
-                        } catch(NumberFormatException e) {
-                            port = 1234;
-                        }
-                    }
-
                 }
 
             }
@@ -58,18 +48,13 @@ public class Main {
             }
             System.out.println("Вроде подключились! ");
             new Updater(socket);
-            //Отправляем служебное сообщение с паролем
-            //Включаем прослушку сообщений с сервера
             String word;
             while(true) {
                 try {
                     //Ждем пока клиент что-нибудь напишет
                     word = scan.nextLine();
                     if(word.compareToIgnoreCase("end") == 0) break;
-//	        	if(word.compareToIgnoreCase("clear") == 0) clear();
-                    System.out.println("ОТЛАДКА: Отправляю " + word);
                     outBW.write(word+"\n");
-                    //Отправляем сообщение на сервер
                     outBW.flush();
                 } catch (IOException e) {
                     System.out.println("Вас отключили от сервера");
