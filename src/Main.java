@@ -53,7 +53,7 @@ public class Main {
                 try {
                     //Ждем пока клиент что-нибудь напишет
                     word = scan.nextLine();
-                    if(word.compareToIgnoreCase("end") == 0) break;
+                    if(word.compareToIgnoreCase("exit") == 0) break;
                     outBW.write(word+"\n");
                     outBW.flush();
                 } catch (IOException e) {
@@ -62,7 +62,7 @@ public class Main {
                 }
             }
             System.out.println("Завершение сеанса");
-
+            System.exit(0);
         }
 
 
