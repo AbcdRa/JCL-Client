@@ -8,10 +8,8 @@ import java.util.Scanner;
 public class Main {
         private static Socket socket;
         private static Scanner scan = new Scanner(System.in);
-        private static String name;
         private static BufferedWriter outBW;
         private static String ip = "localhost";
-        private static Process process = null;
 
         //Инициализируем сокет
         private static boolean initSocket() {
@@ -53,7 +51,7 @@ public class Main {
                 try {
                     //Ждем пока клиент что-нибудь напишет
                     word = scan.nextLine();
-                    if(word.compareToIgnoreCase("exit") == 0) break;
+                    if(word.compareToIgnoreCase("end") == 0) break;
                     outBW.write(word+"\n");
                     outBW.flush();
                 } catch (IOException e) {
@@ -63,8 +61,27 @@ public class Main {
             }
             System.out.println("Завершение сеанса");
             System.exit(0);
+            close();
         }
 
+        private static void close() {
+            try {
+                scan.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                outBW.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                socket.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
 
 
 
